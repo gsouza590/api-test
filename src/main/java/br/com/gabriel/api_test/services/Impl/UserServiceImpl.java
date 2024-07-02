@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.gabriel.api_test.models.User;
 import br.com.gabriel.api_test.repositories.UserRepository;
 import br.com.gabriel.api_test.services.UserService;
+import br.com.gabriel.api_test.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -15,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User findById(Integer id) {
-		return repository.findById(id).orElse(null);
+		return repository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 
 }
